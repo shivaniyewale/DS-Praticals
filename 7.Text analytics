@@ -1,0 +1,527 @@
+ 
+CODE 1 :-
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk import pos_tag
+from sklearn.feature_extraction.text import TfidfVectorizer
+# -------------------- PART 1: TEXT PREPROCESSING --------------------
+text = "Text analytics is the process of analyzing text data to extract useful information."
+print("========== TEXT PREPROCESSING ==========\n")
+print("----- ORIGINAL TEXT -----")
+print(text)
+# Tokenization
+tokens = word_tokenize(text)
+print("\n----- TOKENS -----")
+print(tokens)
+# POS Tagging
+pos = pos_tag(tokens)
+print("\n----- POS TAGS -----")
+for word, tag in pos:
+print(f"{word:<12} -> {tag}")
+# Stopwords removal
+stop_words = set(stopwords.words('english'))
+filtered = [word for word in tokens if word.lower() not in stop_words]
+print("\n----- AFTER STOPWORD REMOVAL -----")
+print(filtered)
+# Stemming
+stemmer = PorterStemmer()
+stemmed = [stemmer.stem(word) for word in filtered]
+print("\n----- STEMMED WORDS -----")
+print(stemmed)
+# Lemmatization
+lemmatizer = WordNetLemmatizer()
+lemmatized = [lemmatizer.lemmatize(word) for word in filtered]
+print("\n----- LEMMATIZED WORDS -----")
+print(lemmatized)
+# -------------------- PART 2: TF-IDF --------------------
+documents = [
+"Text analytics is useful",
+"Text data analysis is important",
+"Analytics helps extract information"
+]
+print("\n\n========== TF-IDF REPRESENTATION ==========\n")
+print("----- DOCUMENTS -----")
+for i, doc in enumerate(documents, 1):
+print(f"Doc {i}: {doc}")
+vectorizer = TfidfVectorizer()
+tfidf_matrix = vectorizer.fit_transform(documents)
+features = vectorizer.get_feature_names_out()
+matrix = tfidf_matrix.toarray()
+print("\n----- FEATURE NAMES -----")
+print(features)
+print("\n----- TF-IDF MATRIX -----")
+print("Rows = Documents, Columns = Words\n")
+for i in range(len(matrix)):
+print(f"Doc {i+1}:")
+for j in range(len(features)):
+print(f"{features[j]:<12} : {matrix[i][j]:.3f}")
+print()
+
+######explain each line of code
+
+Import Libraries
+import nltk
+Imports the NLTK (Natural Language Toolkit) library.
+Used for text processing tasks like tokenization, stemming, POS tagging, etc.
+
+from nltk.tokenize import word_tokenize
+Imports the word_tokenize() function.
+Used to split a sentence into individual words/tokens.
+Example:
+"Hello world"
+becomes
+['Hello', 'world']
+
+from nltk.corpus import stopwords
+Imports stopwords list.
+Stopwords are common words like is, the, and, of which usually do not add important meaning.
+
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+Imports:
+PorterStemmer() → for stemming
+WordNetLemmatizer() → for lemmatization
+
+from nltk import pos_tag
+Imports POS (Part Of Speech) tagging function.
+Used to identify noun, verb, adjective, etc.
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+Imports TF-IDF vectorizer from Scikit-learn.
+Used to convert text documents into numerical form.
+
+PART 1 : TEXT PREPROCESSING
+text = "Text analytics is the process of analyzing text data to extract useful information."
+Stores the sample sentence in variable text.
+
+print("========== TEXT PREPROCESSING ==========\n")
+Prints heading.
+
+print("----- ORIGINAL TEXT -----")
+print(text)
+Displays original sentence.
+
+Tokenization
+tokens = word_tokenize(text)
+Splits sentence into words/tokens.
+
+Example output:
+
+['Text', 'analytics', 'is', 'the', ...]
+print("\n----- TOKENS -----")
+print(tokens)
+Prints all tokens.
+
+POS Tagging
+pos = pos_tag(tokens)
+Assigns grammatical tags to each word.
+Example:
+('Text', 'NN')
+NN means Noun.
+
+print("\n----- POS TAGS -----")
+Prints heading.
+for word, tag in pos:
+Loops through every word and its POS tag.
+
+print(f"{word:<12} -> {tag}")
+Prints word and tag in formatted style.
+Example:
+analytics   -> NNS
+
+Stopword Removal
+stop_words = set(stopwords.words('english'))
+Loads English stopwords into a set.
+Example:
+is, the, of, to
+filtered = [word for word in tokens if word.lower() not in stop_words]
+Removes stopwords from tokens.
+Logic:
+word.lower() converts word to lowercase.
+Checks whether word is NOT in stopwords.
+Keeps only meaningful words.
+
+print("\n----- AFTER STOPWORD REMOVAL -----")
+print(filtered)
+Prints filtered words.
+
+Stemming
+stemmer = PorterStemmer()
+Creates stemming object.
+stemmed = [stemmer.stem(word) for word in filtered]
+Converts words to root form.
+Example:
+analyzing → analyz
+information → inform
+print("\n----- STEMMED WORDS -----")
+print(stemmed)
+Prints stemmed words.
+
+Lemmatization
+lemmatizer = WordNetLemmatizer()
+Creates lemmatizer object.
+lemmatized = [lemmatizer.lemmatize(word) for word in filtered]
+Converts words into meaningful dictionary base form.
+Example:
+cars → car
+running → running
+
+Difference:
+Stemming may produce incomplete words.
+Lemmatization gives proper meaningful words.
+
+print("\n----- LEMMATIZED WORDS -----")
+print(lemmatized)
+Prints lemmatized words.
+
+PART 2 : TF-IDF
+documents = [
+"Text analytics is useful",
+"Text data analysis is important",
+"Analytics helps extract information"
+]
+Creates list of documents.
+Each sentence is treated as one document.
+
+print("\n\n========== TF-IDF REPRESENTATION ==========\n")
+Prints heading.
+
+print("----- DOCUMENTS -----")
+Prints heading for documents.
+
+for i, doc in enumerate(documents, 1):
+Loops through documents.
+
+enumerate(...,1) starts numbering from 1.
+
+print(f"Doc {i}: {doc}")
+Prints each document with number.
+
+TF-IDF Vectorization
+vectorizer = TfidfVectorizer()
+Creates TF-IDF vectorizer object.
+
+tfidf_matrix = vectorizer.fit_transform(documents)
+Main Logic:
+Learns all important words from documents.
+
+Calculates:
+
+TF (Term Frequency)
+IDF (Inverse Document Frequency)
+Converts text into numeric matrix.
+
+features = vectorizer.get_feature_names_out()
+Gets all unique words/features.
+Example:
+['analysis', 'analytics', 'data', 'extract']
+matrix = tfidf_matrix.toarray()
+Converts sparse matrix into normal array.
+
+print("\n----- FEATURE NAMES -----")
+print(features)
+Prints all feature words.
+
+print("\n----- TF-IDF MATRIX -----")
+print("Rows = Documents, Columns = Words\n")
+Prints matrix heading.
+
+for i in range(len(matrix)):
+Loops through each document row.
+
+print(f"Doc {i+1}:")
+Prints document number.
+
+for j in range(len(features)):
+Loops through each feature word.
+
+print(f"{features[j]:<12} : {matrix[i][j]:.3f}")
+Prints TF-IDF score of every word.
+
+.3f means show 3 decimal places.
+
+Example:
+analytics : 0.423
+
+###########
+Important Viva Questions & Answers
+What is Tokenization?
+Splitting text into small units called tokens.
+
+What is POS Tagging?
+Identifying grammatical role of words like noun, verb, adjective.
+
+What are Stopwords?
+Common words with little meaning like “is”, “the”, “and”.
+
+Difference between Stemming and Lemmatization?
+Stemming	Lemmatization
+Cuts word roughly	Gives meaningful root word
+Faster	More accurate
+Example: running → runn	running → run
+What is TF?
+Frequency of a word in one document.
+
+What is IDF?
+Measures importance of word across all documents.
+
+What is TF-IDF?
+Numerical value showing importance of a word in a document.
+
+Formula:
+
+T
+F
+-
+I
+D
+F
+=
+T
+F
+×
+I
+D
+F
+TF-IDF=TF×IDF
+
+Why is TF-IDF used?
+To convert text data into numerical form for machine learning.
+
+
+More important questions and answers on this practical 
+
+Important Viva Questions & Answers – Text Analytics Practical
+1. What is Text Analytics?
+Text analytics is the process of extracting useful information from text data.
+
+2. What is NLP?
+NLP (Natural Language Processing) is a branch of AI that helps computers understand human language.
+
+3. What is Tokenization?
+Breaking text into smaller parts called tokens (words or sentences).
+
+Example:
+
+"I love AI"
+becomes
+
+['I', 'love', 'AI']
+4. Why is tokenization important?
+Because further text processing works on tokens.
+
+5. What are Stopwords?
+Frequently used words with less meaning like:
+
+is
+
+the
+
+and
+
+of
+
+6. Why remove stopwords?
+To reduce unnecessary words and improve analysis accuracy.
+
+7. What is POS Tagging?
+POS (Part Of Speech) tagging identifies grammar roles of words.
+
+Example:
+
+Noun
+
+Verb
+
+Adjective
+
+8. What does NN mean in POS tagging?
+NN means Singular Noun.
+
+9. What does VB mean?
+VB means Verb.
+
+10. What is Stemming?
+Reducing words to root form by cutting suffixes.
+
+Example:
+
+playing → play
+information → inform
+11. What is Lemmatization?
+Converting words into meaningful dictionary base form.
+
+Example:
+
+better → good
+cars → car
+12. Difference between stemming and lemmatization?
+Stemming	Lemmatization
+Fast	Slower
+May produce incomplete word	Produces meaningful word
+Uses rule cutting	Uses vocabulary/dictionary
+13. Which is more accurate: stemming or lemmatization?
+Lemmatization is more accurate.
+
+14. What is Document Frequency (DF)?
+Number of documents containing a word.
+
+Example:
+If word appears in 2 out of 3 documents:
+
+DF = 2
+15. What is Term Frequency (TF)?
+How many times a word appears in one document.
+
+Formula:
+
+T
+F
+=
+Number of times term appears
+Total terms in document
+TF= 
+Total terms in document
+Number of times term appears
+​
+ 
+
+16. What is Inverse Document Frequency (IDF)?
+Measures how unique or important a word is across documents.
+
+Formula:
+
+I
+D
+F
+=
+log
+⁡
+(
+N
+D
+F
+)
+IDF=log( 
+DF
+N
+​
+ )
+
+Where:
+
+N
+N = total documents
+
+D
+F
+DF = document frequency
+
+17. What is TF-IDF?
+Technique used to measure importance of a word in a document.
+
+Formula:
+
+T
+F
+-
+I
+D
+F
+=
+T
+F
+×
+I
+D
+F
+TF-IDF=TF×IDF
+
+18. Why use TF-IDF?
+To convert text into numerical values for machine learning.
+
+19. What is Corpus?
+Collection of text documents.
+
+20. What is a Token?
+Single word or text unit after tokenization.
+
+21. Which library is used for NLP in Python?
+The NLTK library.
+
+22. What is Scikit-learn used for?
+Scikit-learn is used for machine learning and TF-IDF vectorization.
+
+23. What does word_tokenize() do?
+Splits sentence into words.
+
+24. Why use lower() in stopword removal?
+To make comparison case-insensitive.
+
+Example:
+
+The = the
+25. What is PorterStemmer()?
+An algorithm used for stemming words.
+
+26. What is WordNetLemmatizer()?
+Tool used for lemmatization using dictionary meanings.
+
+27. What is TfidfVectorizer()?
+Converts text documents into TF-IDF numerical matrix.
+
+28. Why convert text into numbers?
+Machine learning models understand only numerical data.
+
+29. What is Feature Extraction?
+Selecting important words/features from text.
+
+30. What is a Sparse Matrix?
+Matrix containing many zero values.
+
+31. Why use toarray()?
+To convert sparse matrix into normal array format.
+
+32. What is preprocessing in NLP?
+Cleaning and preparing text before analysis.
+
+33. Steps in text preprocessing?
+Tokenization
+
+Stopword Removal
+
+Stemming/Lemmatization
+
+POS Tagging
+
+34. Which preprocessing step removes unwanted words?
+Stopword removal.
+
+35. Which preprocessing step finds root words?
+Stemming and Lemmatization.
+
+36. Real-life applications of Text Analytics?
+Spam detection
+
+Chatbots
+
+Sentiment analysis
+
+Search engines
+
+Recommendation systems
+
+37. What is Sentiment Analysis?
+Finding whether text is positive, negative, or neutral.
+
+38. What type of data is used in text analytics?
+Unstructured text data.
+
+39. Why is text analytics important?
+Because huge amounts of text data are generated daily.
+
+40. What is the output of TF-IDF?
+A matrix of numerical importance scores for words.
+
+
