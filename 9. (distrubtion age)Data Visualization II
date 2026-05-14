@@ -1,0 +1,234 @@
+
+
+Data Visualization II
+
+CODE :-
+import seaborn as sns
+import matplotlib.pyplot as plt
+# -------------------- LOAD DATASET --------------------
+df = sns.load_dataset("titanic")
+print("========== DATA PREVIEW ==========")
+print(df.head())
+print("\n========== DATA INFO ==========")
+print(df.info())
+# -------------------- BOXPLOT --------------------
+print("\n========== BOXPLOT ==========")
+sns.boxplot(x="sex", y="age", hue="survived", data=df)
+plt.title("Age Distribution by Gender and Survival")
+plt.xlabel("Gender")
+plt.ylabel("Age")
+plt.show()
+# -------------------- OBSERVATIONS --------------------
+print("\n========== OBSERVATIONS ==========")
+print("1. Females have higher survival rate than males.")
+print("2. Children (lower age) have higher survival chances.")
+print("3. Male age distribution is wider than females.")
+print("4. Older passengers have lower survival rate.")
+print("5. Some outliers are present in age.")
+This code of pratical explain each line of code
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# -------------------- LOAD DATASET --------------------
+df = sns.load_dataset("titanic")
+
+print("========== DATA PREVIEW ==========")
+print(df.head())
+
+print("\n========== DATA INFO ==========")
+print(df.info())
+
+# -------------------- BOXPLOT --------------------
+print("\n========== BOXPLOT ==========")
+
+sns.boxplot(x="sex", y="age", hue="survived", data=df)
+
+plt.title("Age Distribution by Gender and Survival")
+plt.xlabel("Gender")
+plt.ylabel("Age")
+
+plt.show()
+
+# -------------------- OBSERVATIONS --------------------
+print("\n========== OBSERVATIONS ==========")
+
+print("1. Females have higher survival rate than males.")
+print("2. Children (lower age) have higher survival chances.")
+print("3. Male age distribution is wider than females.")
+print("4. Older passengers have lower survival rate.")
+print("5. Some outliers are present in age.")
+
+######################### Line by Line Explanation
+import seaborn as sns
+Imports the Seaborn library.
+sns is a short name used for Seaborn.
+
+Seaborn is used for data visualization and plotting graphs.
+
+import matplotlib.pyplot as plt
+Imports Matplotlib pyplot module.
+
+plt is a short name.
+
+Used for displaying graphs and adding titles, labels, etc.
+
+LOAD DATASET
+df = sns.load_dataset("titanic")
+Loads the inbuilt Titanic dataset from Seaborn.
+
+Dataset is stored in variable df.
+
+df means DataFrame.
+
+print("========== DATA PREVIEW ==========")
+Prints heading for output section.
+
+print(df.head())
+Displays first 5 rows of dataset.
+
+Helps to preview data.
+
+print("\n========== DATA INFO ==========")
+Prints heading for dataset information.
+
+print(df.info())
+Shows information about dataset:
+Number of rows and columns
+Data types
+Missing values
+
+BOXPLOT
+print("\n========== BOXPLOT ==========")
+Prints heading for boxplot section.
+sns.boxplot(x="sex", y="age", hue="survived", data=df)
+Creates a box plot.
+
+Parameters:
+x="sex"
+Gender on X-axis.
+Male and Female categories.
+
+y="age"
+Age values on Y-axis.
+hue="survived"
+Separates data based on survival.
+0 = Not Survived
+1 = Survived
+data=df
+
+Uses Titanic dataset.
+
+TITLE AND LABELS
+plt.title("Age Distribution by Gender and Survival")
+Adds title to graph.
+
+plt.xlabel("Gender")
+Labels X-axis as Gender.
+
+plt.ylabel("Age")
+Labels Y-axis as Age.
+
+plt.show()
+Displays the boxplot graph.
+
+OBSERVATIONS
+print("\n========== OBSERVATIONS ==========")
+Prints heading for observations.
+
+print("1. Females have higher survival rate than males.")
+Observation from graph:
+
+More females survived compared to males.
+
+print("2. Children (lower age) have higher survival chances.")
+Younger passengers survived more.
+
+print("3. Male age distribution is wider than females.")
+Male ages are more spread out.
+
+print("4. Older passengers have lower survival rate.")
+Older people survived less.
+
+print("5. Some outliers are present in age.")
+Some age values are far from normal range.
+These are called outliers.
+
+###########Important Viva/Oral Questions
+
+What is Box Plot?
+A box plot is a graphical representation used to show:
+
+Median
+Quartiles
+Outliers
+Spread of data
+
+What is Seaborn?
+Seaborn is a Python visualization library built on Matplotlib used for attractive statistical graphs.
+
+What is Matplotlib?
+Matplotlib is a Python library used for plotting charts and graphs.
+
+What is hue in Seaborn?
+hue is used to divide data into categories using different colors.
+
+What is Outlier?
+An outlier is a value that is very different from other values in dataset.
+
+What does head() do?
+head() displays first 5 rows of dataset.
+
+What does info() do?
+info() gives summary information about dataset including data types and missing values.
+
+
+file_000000003cfc72079ac5347345b464eb
+Give the answers of these questions 
+
+Answers for Required Questions
+1. Why is a box plot suitable for analyzing age distribution in this dataset?
+A box plot is suitable because it shows:
+
+Median
+Spread of age data
+Quartiles
+Outliers
+It helps compare age distribution between males and females and also survival categories.
+
+2. What is the purpose of using the hue parameter in the box plot?
+The hue parameter is used to divide data into different categories using different colors.
+
+In this practical:
+hue="survived"
+0 → Not Survived
+1 → Survived
+This helps compare survival information visually.
+
+3. Why is it necessary to handle missing values in the age column before visualization?
+Missing values can:
+Give incorrect analysis
+Affect graph accuracy
+Cause errors in calculations
+Handling missing values improves visualization and results.
+
+4. What information does the median line in a box plot represent?
+The median line represents the middle value of the dataset.
+It divides the data into two equal halves:
+50% values above median
+50% values below median
+
+5. How are outliers identified in a box plot?
+Outliers are identified as points lying outside the whiskers of the box plot.
+
+They are unusually high or low values compared to the rest of the data.
+
+Example:
+
+Very high age compared to most passengers.
+
+
+Oral Exam Answer
+“If the dataset has even number of values, median is calculated by taking the average of the two middle values.”
+
+
