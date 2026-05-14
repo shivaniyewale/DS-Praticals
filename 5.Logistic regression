@@ -1,0 +1,573 @@
+
+CODE 1 :-
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
+# Load dataset
+data = pd.read_csv("C:\\Users\\raunak\\Downloads\\Social_Network_Ads.csv")
+# Features and target
+X = data[['Age', 'EstimatedSalary']]
+y = data['Purchased']
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+X, y, test_size=0.25, random_state=0
+)
+# Train model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+# Predict
+y_pred = model.predict(X_test)
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+TN, FP, FN, TP = cm.ravel()
+print("Confusion Matrix:")
+print(cm)
+# Metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+error_rate = 1 - accuracy
+# Output
+print("\nValues:")
+print("TP:", TP)
+print("FP:", FP)
+print("TN:", TN)
+print("FN:", FN)
+print("\nPerformance Metrics:")
+print("Accuracy:", accuracy)
+print("Error Rate:", error_rate)
+print("Precision:", precision)
+print("Recall:", recall)
+
+##########explaination
+
+import pandas as pd
+Imports the pandas library.
+pd is an alias (short name) for pandas.
+Used for handling datasets in table form (DataFrame).
+
+from sklearn.model_selection import train_test_split
+Imports train_test_split() function from sklearn.
+
+Used to divide data into:
+
+Training data
+
+Testing data
+
+from sklearn.linear_model import LogisticRegression
+Imports Logistic Regression model.
+
+Logistic Regression is used for classification problems.
+
+Here it predicts whether a person will purchase or not.
+
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
+Imports evaluation metrics:
+
+confusion_matrix() → gives TP, FP, TN, FN
+
+accuracy_score() → calculates accuracy
+
+precision_score() → calculates precision
+
+recall_score() → calculates recall
+
+Load Dataset
+data = pd.read_csv("C:\\Users\\raunak\\Downloads\\Social_Network_Ads.csv")
+Reads CSV file using pandas.
+
+Stores dataset into variable data.
+
+read_csv() loads data from CSV file.
+
+Features and Target
+X = data[['Age', 'EstimatedSalary']]
+Selects input features.
+Age and EstimatedSalary are independent variables.
+Stored in X.
+
+y = data['Purchased']
+Selects target/output column.
+Purchased is dependent variable.
+Values are usually:
+0 → Not Purchased
+
+1 → Purchased
+
+Split Data
+X_train, X_test, y_train, y_test = train_test_split(
+X, y, test_size=0.25, random_state=0
+)
+Splits dataset into training and testing sets.
+Parameters:
+X → input data
+y → output data
+test_size=0.25
+25% data for testing
+75% data for training
+
+random_state=0
+Gives same random split every time
+
+Variables:
+X_train → training inputs
+
+X_test → testing inputs
+
+y_train → training outputs
+
+y_test → testing outputs
+
+Train Model
+model = LogisticRegression()
+Creates Logistic Regression model object.
+Stored in variable model.
+
+model.fit(X_train, y_train)
+Trains the model using training data.
+fit() learns relationship between input and output.
+
+Prediction
+y_pred = model.predict(X_test)
+Predicts output using test data.
+Predicted values stored in y_pred.
+
+Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+Creates confusion matrix.
+Compares actual values (y_test) with predicted values (y_pred).
+Matrix format:
+
+[TN FP
+FN  TP]
+
+Where:
+
+TP → True Positive
+
+TN → True Negative
+
+FP → False Positive
+
+FN → False Negative
+
+TN, FP, FN, TP = cm.ravel()
+ravel() converts matrix into single row.
+
+Stores values separately.
+Example:
+
+[[65  3]
+ [ 8 24]]
+Then:
+
+TN = 65
+
+FP = 3
+
+FN = 8
+
+TP = 24
+
+print("Confusion Matrix:")
+print(cm)
+Prints confusion matrix.
+
+Metrics Calculation
+accuracy = accuracy_score(y_test, y_pred)
+Calculates accuracy.
+Formula:
+Accuracy= TP+TN/FP+FN+TP+TN
+​
+precision = precision_score(y_test, y_pred)
+Calculates precision.
+Formula:
+Precision= TP+/TP+FP
+​
+recall = recall_score(y_test, y_pred)
+Calculates recall.
+Formula:
+Recall= TP/TP+FN
+
+​error_rate = 1 - accuracy
+Calculates error rate.
+Error Rate = 1 − Accuracy
+Formula:
+Error Rate=1−Accuracy
+
+Output Section
+print("\nValues:")
+\n gives new line.
+print("TP:", TP)
+print("FP:", FP)
+print("TN:", TN)
+print("FN:", FN)
+Prints confusion matrix values separately.
+
+print("\nPerformance Metrics:")
+Prints heading for metrics.
+
+print("Accuracy:", accuracy)
+Displays accuracy value.
+
+print("Error Rate:", error_rate)
+Displays error rate.
+
+print("Precision:", precision)
+Displays precision value.
+
+print("Recall:", recall)
+Displays recall value.
+
+###############Short Oral Exam Questions & Answers
+1. What is Logistic Regression?
+Logistic Regression is a supervised machine learning algorithm used for classification problems.
+
+2. Why use Logistic Regression here?
+To predict whether customer will purchase product or not.
+
+3. What are features in this program?
+Age and EstimatedSalary.
+
+4. What is target variable?
+Purchased.
+
+5. What is train_test_split?
+It divides dataset into training and testing data.
+
+6. Why use test_size=0.25?
+25% data is used for testing.
+
+7. What is confusion matrix?
+A table used to evaluate classification model performance.
+
+8. What is TP?
+Correctly predicted positive values.
+
+9. What is TN?
+Correctly predicted negative values.
+
+10. What is FP?
+Incorrectly predicted positive values.
+
+11. What is FN?
+Incorrectly predicted negative values.
+
+12. What is accuracy?
+Percentage of correct predictions.
+
+13. What is precision?
+Out of predicted positives, how many are correct.
+
+14. What is recall?
+Out of actual positives, how many are correctly predicted.
+
+15. Why use .fit()?
+To train the model.
+
+16. Why use .predict()?
+To predict output values.
+
+
+Precision
+Precision means:
+
+👉 Out of all people predicted as YES, how many were actually YES.
+
+Formula:
+
+P
+r
+e
+c
+i
+s
+i
+o
+n
+=
+T
+P
+T
+P
++
+F
+P
+Precision= 
+TP+FP
+TP
+​
+ 
+
+Simple Example
+Suppose model predicted 10 people will buy product.
+
+But actually:
+
+8 people bought product ✅
+
+2 people did not buy ❌
+
+So:
+
+TP = 8
+
+FP = 2
+
+Precision:
+
+8
+8
++
+2
+=
+8
+10
+=
+0.8
+8+2
+8
+​
+ = 
+10
+8
+​
+ =0.8
+Precision = 80%
+
+Meaning
+Out of all predicted buyers, 80% were correct.
+
+Recall
+Recall means:
+
+👉 Out of all actual YES people, how many were correctly found by model.
+
+Formula:
+
+R
+e
+c
+a
+l
+l
+=
+T
+P
+T
+P
++
+F
+N
+Recall= 
+TP+FN
+TP
+​
+ 
+
+Simple Example
+Actually there are 12 people who bought product.
+
+Model correctly identified only 8 people.
+
+Missed 4 people.
+
+So:
+
+TP = 8
+
+FN = 4
+
+Recall:
+
+8
+8
++
+4
+=
+8
+12
+=
+0.67
+8+4
+8
+​
+ = 
+12
+8
+​
+ =0.67
+Recall = 67%
+
+Meaning
+Model found 67% of actual buyers.
+
+Easy Difference
+Precision	Recall
+Checks correctness of predicted YES	Checks how many actual YES are found
+Focus on false positives	Focus on false negatives
+“How accurate are positive predictions?”	“How many positives did model catch?”
+Very Easy Real-Life Example
+Imagine spam email detection.
+
+Precision
+Out of emails marked as spam, how many were truly spam?
+
+Recall
+Out of all spam emails, how many did system detect?
+
+One-line Memory Trick
+Precision → Prediction correctness
+
+Recall → Finding all actual positives
+
+
+Difference between linearly regression and logistics regression 
+
+Difference Between Linear Regression and Logistic Regression
+Linear Regression	Logistic Regression
+Used for prediction of continuous values	Used for classification
+Output is numeric value	Output is category/class
+Predicts values like price, marks, salary	Predicts Yes/No, True/False
+Uses straight line equation	Uses sigmoid function
+Output can be any number	Output lies between 0 and 1
+Example: House price prediction	Example: Spam email detection
+Linear Regression
+Used when output is continuous.
+
+Example:
+
+Predict house price
+
+Predict salary
+
+Predict temperature
+
+Equation:
+
+y
+=
+m
+x
++
+b
+y=mx+b
+m
+m
+1.0
+
+b
+b
+5.0
+
+Slope and intercept sliders update the line on the graph.
+-10
+-8
+-6
+-4
+-2
+2
+4
+6
+8
+10
+-10
+-5
+5
+10
+y-intercept
+x-intercept
+Where:
+
+y = predicted output
+
+m = slope
+
+x = input
+
+b = intercept
+
+Example
+Study hours → Predict marks.
+
+Logistic Regression
+Used for classification problems.
+
+Example:
+
+Purchased or Not Purchased
+
+Spam or Not Spam
+
+Pass or Fail
+
+Uses sigmoid function:
+
+σ
+(
+x
+)
+=
+1
+1
++
+e
+−
+x
+σ(x)= 
+1+e 
+−x
+ 
+1
+​
+ 
+
+Output:
+
+Between 0 and 1
+
+Converted into class labels.
+
+Example:
+
+Probability > 0.5 → YES
+
+Probability < 0.5 → NO
+
+Easy Memory Trick
+Linear Regression
+👉 Predicts “How much?”
+
+Logistic Regression
+👉 Predicts “Which class?”
+
+Oral Questions & Answers
+1. What is Linear Regression?
+Linear Regression is used to predict continuous values.
+
+2. What is Logistic Regression?
+Logistic Regression is used for classification problems.
+
+3. Which regression is used for Yes/No prediction?
+Logistic Regression.
+
+4. Which regression uses sigmoid function?
+Logistic Regression.
+
+5. Which regression predicts house prices?
+Linear Regression.
+
+6. Output range of Logistic Regression?
+0 to 1.
+
+7. Output of Linear Regression?
+Continuous numeric value.
+
+
+Very Short Oral Answer
+What is the logic of this code?
+This code trains a Logistic Regression model using age and salary data to predict whether a customer will purchase a product or not, then evaluates model performance using confusion matrix and metrics.
+
+
