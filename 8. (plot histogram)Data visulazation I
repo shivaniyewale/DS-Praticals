@@ -1,0 +1,564 @@
+Data Visualization I
+
+CODE 1 :-
+import seaborn as sns
+import matplotlib.pyplot as plt
+# Load dataset
+df = sns.load_dataset("titanic")
+print("----- DATA PREVIEW -----")
+print(df.head())
+print("\n----- DATA INFO -----")
+print(df.info())
+# Count plot (Survival)
+sns.countplot(x="survived", data=df)
+plt.title("Survival Count")
+plt.show()
+# Count plot (Gender vs Survival)
+sns.countplot(x="sex", hue="survived", data=df)
+plt.title("Survival based on Gender")
+plt.show()
+# Count plot (Class vs Survival)
+sns.countplot(x="pclass", hue="survived", data=df)
+plt.title("Survival based on Passenger Class")
+plt.show()
+# Histogram of fare
+sns.histplot(df["fare"], bins=30, kde=True)
+plt.title("Fare Distribution")
+plt.xlabel("Fare")
+plt.ylabel("Count")
+plt.show()
+
+########Explanation 
+
+import seaborn as sns
+Imports the Seaborn library.
+sns is a short name (alias) for seaborn.
+Seaborn is used for data visualization.
+
+import matplotlib.pyplot as plt
+Imports pyplot module from Matplotlib library.
+plt is an alias.
+
+Used to display graphs and charts.
+# Load dataset
+This is a comment.
+
+Used to explain the code.
+
+df = sns.load_dataset("titanic")
+Loads the built-in Titanic dataset from Seaborn.
+Stores it in variable df.
+df means DataFrame (table format data).
+
+print("----- DATA PREVIEW -----")
+Prints the heading DATA PREVIEW.
+
+print(df.head())
+Displays the first 5 rows of the dataset.
+
+Used to quickly check data.
+
+print("\n----- DATA INFO -----")
+Prints a new heading.
+
+\n means new line.
+
+print(df.info())
+Shows information about dataset:
+Number of rows and columns
+Data types
+Missing values
+
+Count Plot – Survival
+sns.countplot(x="survived", data=df)
+Creates a count plot.
+Counts how many passengers:
+Survived (1)
+Did not survive (0)
+
+x="survived" → variable shown on x-axis.
+
+data=df → dataset used.
+
+plt.title("Survival Count")
+Adds title to graph.
+
+plt.show()
+Displays the graph.
+
+Count Plot – Gender vs Survival
+sns.countplot(x="sex", hue="survived", data=df)
+Creates count plot for male and female passengers.
+hue="survived" separates bars by survival status.
+Helps compare survival based on gender.
+plt.title("Survival based on Gender")
+Adds graph title.
+
+plt.show()
+Displays graph.
+
+Count Plot – Passenger Class vs Survival
+sns.countplot(x="pclass", hue="survived", data=df)
+Creates plot for passenger classes:
+1 = First class
+
+2 = Second class
+
+3 = Third class
+
+hue="survived" shows survival comparison.
+
+plt.title("Survival based on Passenger Class")
+Adds title.
+
+plt.show()
+Displays graph.
+
+Histogram of Fare
+sns.histplot(df["fare"], bins=30, kde=True)
+Creates a histogram of ticket fare.
+
+df["fare"] → fare column.
+
+bins=30 → divides data into 30 groups.
+
+kde=True → draws smooth density curve.
+
+plt.title("Fare Distribution")
+Adds title to histogram.
+
+plt.xlabel("Fare")
+Labels x-axis as Fare.
+
+plt.ylabel("Count")
+Labels y-axis as Count.
+
+plt.show()
+Displays histogram.
+
+######Simple Logic of This Practical
+Load Titanic dataset.
+Preview and inspect data.
+Use graphs to find patterns:
+Survival count
+Survival by gender
+Survival by class
+Fare distribution
+
+######Important Oral Questions with Answers
+
+1. What is Seaborn?
+Seaborn is a Python visualization library used for statistical graphs.
+
+2. What is Data Visualization?
+Representing data using graphs and charts.
+
+3. What is a Count Plot?
+A graph that shows frequency/count of categories.
+
+4. What is Histogram?
+A graph used to show distribution of numerical data.
+
+5. What is KDE in histogram?
+KDE (Kernel Density Estimate) shows a smooth curve of data distribution.
+
+6. What is DataFrame?
+A table-like data structure in pandas.
+
+7. Why use plt.show()?
+To display the graph.
+
+8. What does hue mean in seaborn?
+hue adds color grouping based on another variable.
+
+9. What does head() do?
+Displays first 5 rows of dataset.
+
+10. What does info() do?
+Shows dataset details like columns, data types, and missing values.
+
+
+In the Titanic dataset, Fare means the ticket price paid by a passenger to travel on the Titanic ship.
+
+Example:
+
+Higher fare → expensive ticket (mostly first class)
+
+Lower fare → cheaper ticket (mostly third class)
+
+In the dataset, the column name is:
+
+fare
+It is a numerical variable because it contains numbers like:
+
+7.25
+71.83
+53.10
+
+Oral Answer (Short)
+Fare is the amount paid by a passenger for the Titanic ticket.
+
+
+Which different types of library of python tell me names
+
+Different Types of Python Libraries (Names)
+
+1. Data Analysis Libraries
+Pandas
+
+NumPy
+
+2. Data Visualization Libraries
+Matplotlib
+
+Seaborn
+
+Plotly
+
+3. Machine Learning Libraries
+Scikit-learn
+
+TensorFlow
+
+Keras
+
+PyTorch
+
+4. Web Development Libraries / Frameworks
+Django
+
+Flask
+
+5. GUI (Graphics/User Interface) Libraries
+Tkinter
+
+PyQt
+
+6. Game Development Libraries
+Pygame
+
+7. Database Libraries
+SQLite3
+
+SQLAlchemy
+
+8. Image Processing Libraries
+OpenCV
+
+Pillow
+
+9. Natural Language Processing (NLP) Libraries
+NLTK
+
+spaCy
+
+10. Scientific Computing Libraries
+SciPy
+
+SymPy
+
+Most Important Libraries for Data Science Practical
+Library	Use
+Pandas	Data handling
+NumPy	Numerical operations
+Matplotlib	Basic graphs
+Seaborn	Advanced graphs
+Scikit-learn	Machine learning
+
+Which is best among  pandas numpy matplotlib seaborn scikit learn
+
+There is no single “best” library because each library has a different purpose.
+
+Library	Best For
+Pandas	Handling and analyzing data
+NumPy	Fast mathematical and array operations
+Matplotlib	Basic plotting and graphs
+Seaborn	Attractive statistical graphs
+Scikit-learn	Machine learning algorithms
+Commonly Considered “Best” by Task
+For data analysis → Pandas
+
+For calculations → NumPy
+
+For visualization → Seaborn
+
+For machine learning → Scikit-learn
+
+Short Oral Answer
+“All libraries are important. The best library depends on the task:
+Pandas for data handling, NumPy for calculations, Seaborn/Matplotlib for visualization, and Scikit-learn for machine learning.”
+
+###########Important Oral Questions and Answers – Data Visualization I Practical
+
+1. What is Data Visualization?
+
+Data visualization means representing data using graphs, charts, and plots to understand patterns easily.
+
+2. Why is data visualization important?
+Makes data easy to understand
+Helps find trends and patterns
+Improves decision making
+3. What is Seaborn?
+
+Seaborn is a Python library used for statistical data visualization.
+
+4. Why do we use Matplotlib with Seaborn?
+
+Matplotlib helps in displaying and customizing graphs.
+
+5. What is the Titanic dataset?
+
+The Titanic dataset contains information about passengers such as:
+
+Age
+Gender
+Fare
+Passenger class
+Survival status
+6. What is a DataFrame?
+
+A DataFrame is a table-like structure used to store data in rows and columns.
+
+7. What does sns.load_dataset("titanic") do?
+
+It loads the Titanic dataset from Seaborn library.
+
+8. What is df.head()?
+
+It displays the first 5 rows of the dataset.
+
+9. What is df.info()?
+
+It gives:
+
+Number of columns
+Data types
+Missing values
+10. What is a count plot?
+
+A count plot shows the frequency/count of categorical data.
+
+Example:
+
+Number of males and females
+Number of survivors
+11. Why is survived used in the graph?
+
+To compare passengers who survived and who did not survive.
+
+12. What does hue mean in Seaborn?
+
+hue adds color categories to compare another variable.
+
+Example:
+
+hue="survived"
+
+shows survival using different colors.
+
+13. What is a histogram?
+
+A histogram shows distribution of numerical data.
+
+Example:
+
+Fare
+Age
+14. What is meant by distribution?
+
+Distribution means how data values are spread.
+
+15. Why is fare plotted using histogram?
+
+Because fare is numerical data.
+
+16. What is KDE?
+
+KDE (Kernel Density Estimate) is a smooth curve showing data distribution.
+
+17. What does bins=30 mean?
+
+It divides data into 30 groups/intervals.
+
+18. What is the purpose of plt.title()?
+
+It adds title to the graph.
+
+19. Why do we use plt.xlabel() and plt.ylabel()?
+
+To label x-axis and y-axis.
+
+20. What does plt.show() do?
+
+It displays the graph output.
+
+21. Which passengers survived more in Titanic dataset?
+
+Female passengers survived more than males.
+
+22. Which class passengers survived more?
+
+First-class passengers survived more.
+
+23. Which type of data is used in histogram?
+
+Numerical data.
+
+24. Which type of data is used in count plot?
+
+Categorical data.
+
+25. Difference between histogram and count plot?
+Histogram	Count Plot
+Used for numerical data	Used for categorical data
+Shows distribution	Shows frequency/count
+26. What is categorical data?
+
+Data divided into categories.
+
+Example:
+
+Male/Female
+Survived/Not survived
+27. What is numerical data?
+
+Data containing numbers.
+
+Example:
+
+Fare
+Age
+28. What is pattern analysis?
+
+Finding trends or relationships in data.
+
+29. What are missing values?
+
+Empty or null values in dataset.
+
+30. How can you identify missing values?
+
+Using:
+
+df.info()
+31. What is the advantage of visualization over tables?
+
+Graphs are easier and faster to understand.
+
+32. What is meant by passenger class (pclass)?
+
+Ticket class of passenger:
+
+1 = First class
+2 = Second class
+3 = Third class
+33. Which library is mainly used for plotting in Python?
+
+Matplotlib and Seaborn.
+
+34. What is the use of data=df in seaborn?
+
+It tells Seaborn which dataset to use.
+
+35. What are the main steps in this practical?
+Import libraries
+Load dataset
+Preview data
+Create graphs
+Analyze patterns
+36. What insights can be obtained from this practical?
+Females survived more
+First-class passengers survived more
+Fare distribution is uneven
+37. What is visualization analysis?
+
+Studying graphs to understand data behavior.
+
+38. Why is Titanic dataset popular in data science?
+
+Because it is simple and useful for learning:
+
+Visualization
+Classification
+Data analysis
+39. What is the output of countplot?
+
+Bar graph showing count/frequency.
+
+40. What is the output of histplot?
+
+Histogram showing data distribution.
+
+What is fare
+
+In the Titanic dataset, Fare means the ticket price paid by a passenger to travel on the Titanic ship.
+
+Example:
+
+Higher fare → expensive ticket (mostly first class)
+Lower fare → cheaper ticket (mostly third class)
+
+In the dataset, the column name is:
+
+fare
+
+It is a numerical variable because it contains numbers like:
+
+7.25
+71.83
+53.10
+Oral Answer (Short)
+
+Fare is the amount paid by a passenger for the Titanic ticket.
+
+Which different types of library of python tell me names
+Different Types of Python Libraries (Names)
+1. Data Analysis Libraries
+Pandas
+NumPy
+2. Data Visualization Libraries
+Matplotlib
+Seaborn
+Plotly
+3. Machine Learning Libraries
+Scikit-learn
+TensorFlow
+Keras
+PyTorch
+4. Web Development Libraries / Frameworks
+Django
+Flask
+5. GUI (Graphics/User Interface) Libraries
+Tkinter
+PyQt
+6. Game Development Libraries
+Pygame
+7. Database Libraries
+SQLite3
+SQLAlchemy
+8. Image Processing Libraries
+OpenCV
+Pillow
+9. Natural Language Processing (NLP) Libraries
+NLTK
+spaCy
+10. Scientific Computing Libraries
+SciPy
+SymPy
+
+
+######Most Important Libraries for Data Science Practical
+
+Library	Use
+Pandas	Data handling
+NumPy	Numerical operations
+Matplotlib	Basic graphs
+Seaborn	Advanced graphs
+Scikit-learn	Machine learning
+
+Which is best among  pandas numpy matplotlib seaborn scikit learn
+There is no single “best” library because each library has a different purpose.
+
+
+“All libraries are important. The best library depends on the task:
+Pandas for data handling, NumPy for calculations, Seaborn/Matplotlib for visualization, and Scikit-learn for machine learning.”
