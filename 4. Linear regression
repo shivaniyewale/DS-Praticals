@@ -1,0 +1,553 @@
+
+CODE 1 :-
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+# Load dataset
+df = pd.read_csv("C:\\Users\\raunak\\Downloads\\archive (1)\\BostonHousing.csv")
+print("----- DATA PREVIEW -----")
+print(df.head())
+# Handle missing values (IMPORTANT FIX)
+df = df.fillna(df.mean())
+# Split data
+X = df.drop("medv", axis=1)
+y = df["medv"]
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+# Model
+model = LinearRegression()
+model.fit(X_train, y_train)
+# Prediction
+y_pred = model.predict(X_test)
+# Results
+print("\n----- RESULTS -----")
+print("MSE:", mean_squared_error(y_test, y_pred))
+print("R2 Score:", r2_score(y_test, y_pred))
+import matplotlib.pyplot as plt
+plt.scatter(y_test, y_pred)
+plt.xlabel("Actual Price")
+plt.ylabel("Predicted Price")
+plt.title("Actual vs Predicted Prices")
+# line for perfect prediction
+plt.plot(y_test, y_test)
+plt.show()
+
+##########Explanation
+
+1. Import Libraries
+import pandas as pd
+Imports Pandas library.
+Used for handling datasets in table format (DataFrame).import numpy as np
+Imports NumPy library.
+Used for numerical operations and arrays.
+from sklearn.model_selection import train_test_split
+Imports function to split dataset into:
+Training data
+Testing data
+
+from sklearn.linear_model import LinearRegression
+Imports the Linear Regression model.
+
+from sklearn.metrics import mean_squared_error, r2_score
+Imports evaluation metrics:
+
+MSE → Mean Squared Error
+
+R² Score → Accuracy of model
+
+2. Load Dataset
+df = pd.read_csv("C:\\Users\\raunak\\Downloads\\archive (1)\\BostonHousing.csv")
+Reads CSV file using Pandas.
+Stores dataset into variable df.
+df means DataFrame.
+
+3. Display First Rows
+print("----- DATA PREVIEW -----")
+Prints heading.
+print(df.head())
+Displays first 5 rows of dataset.
+Used to check whether data loaded properly.
+
+4. Handle Missing Values
+df = df.fillna(df.mean())
+fillna() fills missing values.
+df.mean() calculates mean of each column.
+Missing values replaced with column average.
+Example:
+Original	After fillna
+10	10
+NaN	15
+20	20
+Mean = 15
+
+5. Separate Input and Output
+X = df.drop("medv", axis=1)
+X contains input features.
+Removes "medv" column from dataset.
+"medv" = house price (target variable).
+axis=1
+Means column operation.
+y = df["medv"]
+y stores target/output column.
+Here:
+
+X = independent variables
+
+y = dependent variable
+
+6. Split Dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=0)
+Splits data into:
+80% Training data
+20% Testing data
+Parameters
+test_size=0.2
+20% data used for testing.
+random_state=0
+Ensures same random split every time.
+
+7. Create Model
+model = LinearRegression()
+Creates Linear Regression object.
+
+8. Train Model
+model.fit(X_train, y_train)
+Trains model using training data.
+Model learns relationship between features and house price.
+Syntax
+fit(input, output)
+
+9. Predict Values
+y_pred = model.predict(X_test)
+Predicts house prices for test data.
+Output stored in y_pred.
+
+10. Print Results
+print("\n----- RESULTS -----")
+Prints heading.
+Mean Squared Error
+print("MSE:", mean_squared_error(y_test, y_pred))
+Formula
+MSE=1
+Measures prediction error.
+Smaller MSE = better model.
+
+R² Score
+print("R2 Score:", r2_score(y_test, y_pred))
+Formula of R^2
+Measures model accuracy.
+Value ranges from 0 to 1.
+
+R² Value	Meaning
+1	Perfect prediction
+0	Poor prediction
+
+
+11. Import Matplotlib
+import matplotlib.pyplot as plt
+Imports plotting library.
+Used for graphs.
+
+12. Scatter Plot
+plt.scatter(y_test, y_pred)
+Creates scatter plot.
+Compares:
+Actual prices
+Predicted prices
+
+13. Labels
+plt.xlabel("Actual Price")
+Label for X-axis.
+
+plt.ylabel("Predicted Price")
+Label for Y-axis.
+
+14. Title
+plt.title("Actual vs Predicted Prices")
+Adds graph title.
+
+15. Perfect Prediction Line
+plt.plot(y_test, y_test)
+Draws straight line.
+Represents ideal predictions.
+If points lie near line → model is good.
+
+16. Show Graph
+plt.show()
+Displays graph window.
+
+########What This Practical Does
+This practical:
+
+Loads Boston Housing dataset
+
+Cleans missing values
+
+Splits data into train/test
+
+Trains Linear Regression model
+
+Predicts house prices
+
+Calculates accuracy
+
+Shows graph of actual vs predicted prices
+
+#######Important Oral Questions with Answers
+
+Q1. What is Linear Regression?
+Linear Regression is a supervised machine learning algorithm used to predict continuous values.
+
+Q2. What is dependent variable here?
+medv (house price)
+
+Q3. Why use train_test_split?
+To evaluate model performance on unseen data.
+
+Q4. What is MSE?
+Mean Squared Error measures average squared prediction error.
+
+Q5. What is R² score?
+It shows how well the model fits data.
+
+Q6. Why handle missing values?
+Machine learning models cannot work properly with missing data.
+
+Q7. What is prediction?
+Estimating output using trained model.
+
+Q8. What does fit() do?
+Trains the model on training data.
+
+Q9. What does predict() do?
+Predicts output for new/test data.
+
+Q10. Why use scatter plot?
+To visually compare actual and predicted values.
+
+
+#########Oral Questions and Answers – Linear Regression Practical
+
+1. What is Machine Learning?
+Machine Learning is a technique where computers learn patterns from data and make predictions without being explicitly programmed.
+
+2. What is Linear Regression?
+Linear Regression is a supervised learning algorithm used to predict continuous values like house prices.
+
+Formula
+y
+=
+m
+x
++
+b
+y=mx+b
+m
+m
+1.0
+
+b
+b
+5.0
+
+Slope and intercept sliders update the line on the graph.
+-10
+-8
+-6
+-4
+-2
+2
+4
+6
+8
+10
+-10
+-5
+5
+10
+y-intercept
+x-intercept
+Where:
+
+y = predicted value
+
+m = slope
+
+x = input feature
+
+b = intercept
+
+3. Why is Linear Regression called supervised learning?
+Because it uses labeled data where both input and output are known.
+
+4. What is the aim of this practical?
+To predict house prices using the Boston Housing dataset.
+
+5. What is dataset?
+A dataset is a collection of related data arranged in rows and columns.
+
+6. What is Boston Housing Dataset?
+It is a dataset containing information about houses in Boston and their prices.
+
+7. How many samples and features are present?
+506 samples
+
+14 features
+
+8. What is Pandas?
+Pandas is a Python library used for data analysis and handling tables.
+
+9. Why use NumPy?
+NumPy is used for numerical and mathematical operations.
+
+10. What is DataFrame?
+A DataFrame is a table-like data structure in Pandas.
+
+11. What does pd.read_csv() do?
+It loads CSV file data into a DataFrame.
+
+12. What does df.head() do?
+It displays the first 5 rows of the dataset.
+
+13. Why check dataset preview?
+To verify data loaded correctly.
+
+14. What are missing values?
+Values that are empty or not available in the dataset.
+
+Example:
+
+Age
+20
+NaN
+25
+15. Why handle missing values?
+Machine learning models cannot work properly with missing data.
+
+16. What does fillna() do?
+It replaces missing values.
+
+17. Why use mean for missing values?
+Mean gives an average value and maintains dataset balance.
+
+18. What is independent variable?
+Input features used for prediction.
+
+Example:
+
+crime rate
+
+rooms
+
+tax
+
+19. What is dependent variable?
+Output variable to be predicted.
+
+Here:
+medv = house price
+
+20. Why use drop("medv")?
+To separate input features from target output.
+
+21. What does axis=1 mean?
+It indicates column operation.
+
+22. What is train-test split?
+Dividing dataset into training and testing parts.
+
+23. Why split dataset?
+To evaluate model performance on unseen data.
+
+24. What is training data?
+Data used to train the model.
+
+25. What is testing data?
+Data used to test model accuracy.
+
+26. Why use test_size=0.2?
+20% data is reserved for testing.
+
+27. What is random_state=0?
+It ensures same random split every time.
+
+28. What does LinearRegression() do?
+Creates a linear regression model.
+
+29. What does fit() do?
+Trains the model using training data.
+
+30. What does predict() do?
+Predicts output values using test data.
+
+31. What is prediction?
+Estimating output from input data.
+
+32. What is MSE?
+Formula
+M
+S
+E
+=
+1
+n
+∑
+i
+=
+1
+n
+(
+y
+i
+−
+y
+i
+^
+)
+2
+MSE= 
+n
+1
+​
+ ∑ 
+i=1
+n
+​
+ (y 
+i
+​
+ − 
+y 
+i
+​
+ 
+^
+​
+ ) 
+2
+ 
+
+Mean Squared Error measures prediction error.
+
+Lower MSE = better model.
+
+33. What is R² Score?
+Formula
+R
+2
+=
+1
+−
+∑
+(
+y
+i
+−
+y
+i
+^
+)
+2
+∑
+(
+y
+i
+−
+y
+ˉ
+)
+2
+R 
+2
+ =1− 
+∑(y 
+i
+​
+ − 
+y
+ˉ
+​
+ ) 
+2
+ 
+∑(y 
+i
+​
+ − 
+y 
+i
+​
+ 
+^
+​
+ ) 
+2
+ 
+​
+ 
+
+It measures model accuracy.
+
+Closer to 1 → good model
+
+Closer to 0 → poor model
+
+34. What is Matplotlib?
+Matplotlib is a Python library used for plotting graphs.
+
+35. Why use scatter plot?
+To compare actual and predicted values visually.
+
+36. What are actual values?
+Real house prices from dataset.
+
+37. What are predicted values?
+Prices predicted by the model.
+
+38. Why draw line using plt.plot(y_test, y_test)?
+It represents perfect prediction line.
+
+39. How to know model is good from graph?
+If scatter points are close to the straight line, predictions are accurate.
+
+40. What is overfitting?
+When model memorizes training data and performs poorly on new data.
+
+41. What is underfitting?
+When model cannot learn patterns properly.
+
+42. Difference between classification and regression?
+Classification	Regression
+Predicts category	Predicts continuous value
+Example: spam/not spam	Example: house price
+43. Why is house price prediction a regression problem?
+Because house price is a continuous numeric value.
+
+44. What type of output does Linear Regression give?
+Continuous numeric output.
+
+45. What is correlation?
+It measures relationship between variables.
+
+46. What happens if dataset contains more noise?
+Prediction accuracy decreases.
+
+47. Why is preprocessing important?
+To clean and prepare data before training.
+
+48. What are features?
+Input columns used for prediction.
+
+49. Which library is used for machine learning here?
+scikit-learn
+
+50. What is the full form of MSE?
+Mean Squared Error.
+
+
+One-Line Oral Answer
+“The logic of this code is to train a Linear Regression model on housing data so it can predict house prices based on input features.”
+
