@@ -1,33 +1,54 @@
 
 
 CODE 1 :-
-import pandas as pd
-# Load dataset
-df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
-# Create categorical groups based on sepal length
-df['sepal_group'] = pd.cut(df['sepal_length'], bins=3, labels=["Low", "Medium", "High"])
-# Group by categorical variable and calculate statistics
-grouped = df.groupby('sepal_group')['petal_length']
-print("Mean:\n", grouped.mean())
-print("\nMedian:\n", grouped.median())
-print("\nMinimum:\n", grouped.min())
-print("\nMaximum:\n", grouped.max())
-print("\nStandard Deviation:\n", grouped.std())
+Code 1: import pandas as pd
+
+data={
+    'Age':[22,45,35,60,27,32,49,55,36,47],
+    'Income':[25000,50000,40000,75000,30000,35000,45000,60000,42000,55000]
+}
+
+df=pd.DataFrame(data)
+df['Age_group']=pd.cut(df['Age'],
+                       bins=[0,30,50,100],
+                       labels=['Young','Middle','Senior'])
+print("Dataset:")
+print(df)
+
+grouped=df.groupby('Age_group', observed=False)
+
+print("\nSummary Statistics of Income grouped by Age Group:\n")
+print(grouped['Income'].agg(['mean','median','min','max','std']))
+
 
 CODE 2 :-
 import pandas as pd
-df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
-grouped = df.groupby('species')
-for name, group in grouped:
-print("\n----- Species:", name, "-----")
-print("\nMean:")
-print(group.mean(numeric_only=True))
-print("\nStandard Deviation:")
-print(group.std(numeric_only=True))
-print("\nPercentiles:")
-print(group.describe())
 
+# Load iris dataset
+iris = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv") 
 
+# Display first 5 rows
+print("First 5 Rows of Dataset:\n")
+print(iris.head())
+
+# Group dataset by species
+grouped = iris.groupby('species')
+
+# Statistical details
+print("\nStatistical Details:\n")
+print(grouped.describe())
+
+# Mean of each species
+print("\nMean Values:\n")
+print(grouped.mean())
+
+# Standard deviation
+print("\nStandard Deviation:\n")
+print(grouped.std())
+
+# Percentile values
+print("\nPercentile Values:\n")
+print(grouped.quantile([0.25, 0.50, 0.75]))
 
 ###############explaination
 Practical: Descriptive Statistics – Measures of Central Tendency and Variability
@@ -50,195 +71,214 @@ using Python and Pandas.
 
 ##########CODE 1 Explanation
 
+Step-by-Step Explanation
+1. Import Pandas Library
 import pandas as pd
-Explanation:
-import is used to include a library.
-pandas is a Python library used for data analysis.
-pd is the short name (alias) for pandas.
-
-# Load dataset
-df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
-Explanation:
-pd.read_csv() reads the CSV file.
-Dataset is stored inside variable df.
-df means DataFrame (table format data).
+•	Imports the Pandas library. 
+•	pd is the shortcut name for Pandas. 
+________________________________________
+2. Create Dataset
+data={
+    'Age':[22,45,35,60,27,32,49,55,36,47],
+    'Income':[25000,50000,40000,75000,30000,35000,45000,60000,42000,55000]
+}
+•	Creates a dictionary containing: 
+o	Age 
+o	Income 
+________________________________________
+3. Convert into DataFrame
+df=pd.DataFrame(data)
+•	Converts the dictionary into a DataFrame (table format). 
 Example:
-sepal_length	sepal_width	petal_length	species
-5.1	3.5	1.4	Iris-setosa
-
-# Create categorical groups based on sepal length
-df['sepal_group'] = pd.cut(df['sepal_length'], bins=3, labels=["Low", "Medium", "High"])
-Explanation:
-This line creates categories/groups from numeric values.
-Breakdown:
-df['sepal_length']
-→ Takes sepal length column.
-pd.cut()
-→ Divides continuous numeric values into groups.
-bins=3
-→ Creates 3 groups.
-labels=["Low", "Medium", "High"]
-→ Names of groups.
-Example:
-Sepal Length	Group
-4.5	Low
-5.8	Medium
-7.2	High
-
-A new column sepal_group is created.
-
-# Group by categorical variable and calculate statistics
-grouped = df.groupby('sepal_group')['petal_length']
-Explanation:
-groupby('sepal_group')
-→ Groups rows according to category.
-['petal_length']
-→ Selects petal_length column for calculations.
-Result stored in variable grouped.
+Age	Income
+22	25000
+45	50000
+35	40000
+________________________________________
+4. Create Age Groups
+df['Age_group']=pd.cut(df['Age'],
+                       bins=[0,30,50,100],
+                       labels=['Young','Middle','Senior'])
 Meaning:
-Now statistics will be calculated separately for:
-Low group
-Medium group
-High group
-print("Mean:\n", grouped.mean())
-Explanation:
-mean() calculates average value.
-Formula:
+pd.cut() divides age values into categories.
+Bins:
+•	0–30 → Young 
+•	30–50 → Middle 
+•	50–100 → Senior 
+So:
+•	Age 22 → Young 
+•	Age 45 → Middle 
+•	Age 60 → Senior 
+________________________________________
+Visual Representation of Age Groups
+Age Range	Label
+0–30	Young
+30–50	Middle
+50–100	Senior
+________________________________________
+5. Print Dataset
+print("Dataset:")
+print(df)
+Displays the complete dataset with the new Age_group column.
+________________________________________
+6. Group Data by Age Group
+grouped=df.groupby('Age_group', observed=False)
+Meaning:
+Groups rows according to:
+•	Young 
+•	Middle 
+•	Senior 
+________________________________________
+7. Calculate Summary Statistics
+print(grouped['Income'].agg(['mean','median','min','max','std']))
+This calculates statistics of Income for each age group.
+________________________________________
+Meaning of Each Function
+Function	Meaning
+mean	Average
+median	Middle value
+min	Smallest value
+max	Largest value
+std	Standard deviation
+________________________________________
+Expected Output (Approx.)
+Age_group	mean	median	min	max	std
+Young	27500	27500	25000	30000	3535
+Middle	44571	43500	35000	55000	6800
+Senior	67500	67500	60000	75000	10606
+________________________________________
+Important Oral Exam Questions
+Q1. What is Pandas?
+Pandas is a Python library used for data analysis and data manipulation.
+________________________________________
+Q2. What is a DataFrame?
+A DataFrame is a table-like data structure with rows and columns.
+________________________________________
+Q3. What is pd.cut()?
+pd.cut() is used to divide continuous data into categories or groups.
+________________________________________
+Q4. Why is groupby() used?
+groupby() is used to group similar data together for analysis.
+________________________________________
+Q5. What is standard deviation?
+Standard deviation measures how much values differ from the average.
+________________________________________
+Q6. Difference between mean and median?
+Mean	Median
+Average of all values	Middle value
+Affected by outliers	Less affected by outliers
+________________________________________
+Q7. What does agg() do?
+agg() performs multiple statistical operations together.
+________________________________________
+Q8. Why are labels used in pd.cut()?
+Labels give meaningful names to groups.
+Example:
+•	Young 
+•	Middle 
+•	Senior 
 
-Mean=∑x/n​
+#####CODE 2 Explanation
 
-Output Example:
-Mean:
-Low       1.46
-Medium    4.25
-High      5.55
-
-print("\nMedian:\n", grouped.median())
-Explanation:
-median() gives middle value after sorting data.
-Output Example:
-Median:
-Low       1.5
-Medium    4.3
-High      5.6
-
-print("\nMinimum:\n", grouped.min())
-Explanation:
-min() gives smallest value in each group.
-Output Example:
-Minimum:
-Low       1.0
-Medium    3.0
-High      4.5
-
-print("\nMaximum:\n", grouped.max())
-Explanation:
-max() gives largest value.
-Output Example:
-Maximum:
-Low       1.9
-Medium    5.1
-High      6.9
-
-print("\nStandard Deviation:\n", grouped.std())
-Explanation:
-std() calculates standard deviation.
-It shows how much data varies from mean.
-Low SD → data close to mean
-High SD → data spread out more
-Formula:
-
-σ=square root(∑(x−μ)^2/N) 
-Output Example:
-Standard Deviation:
-Low       0.17
-Medium    0.52
-High      0.60
-
-#####
-CODE 2 Explanation
+Step-by-Step Explanation
+1. Import Pandas Library
 import pandas as pd
-Explanation:
-Imports pandas library.
-
-df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
-Explanation:
-Loads iris dataset into DataFrame.
-
-grouped = df.groupby('species')
-Explanation:
-Groups dataset according to flower species.
-Species are:
-Iris-setosa
-Iris-versicolor
-Iris-virginica
-for name, group in grouped:
-Explanation:
-Loop runs through each species group.
-name
-→ species name
-group
-→ rows belonging to that species
-Example:
-First loop:
-name = Iris-setosa
-
-print("\n----- Species:", name, "-----")
-Explanation:
-Prints heading for each species.
-Example:
-
------ Species: Iris-setosa -----
-
-print("\nMean:")
-print(group.mean(numeric_only=True))
-Explanation:
-Calculates average of numeric columns only.
-numeric_only=True
-→ ignores text columns like species.
-Output Example:
-Mean:
-sepal_length    5.006
-sepal_width     3.428
-petal_length    1.462
-petal_width     0.246
-
-print("\nStandard Deviation:")
-print(group.std(numeric_only=True))
-Explanation:
-Calculates spread/variation of data.
-Output Example:
-Standard Deviation:
-sepal_length    0.352
-sepal_width     0.379
-petal_length    0.174
-petal_width     0.105
-
-print("\nPercentiles:")
-print(group.describe())
-Explanation:
-describe() gives complete statistical summary:
-count
-mean
-std
-min
-25%
-
-50%
-
-75%
-max
+•	Imports the Pandas library. 
+•	Used for data analysis and handling tables. 
+________________________________________
+2. Load Dataset
+iris = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+Meaning:
+•	read_csv() reads a CSV file. 
+•	Dataset is stored in variable iris. 
+________________________________________
+3. Display First 5 Rows
+print("First 5 Rows of Dataset:\n")
+print(iris.head())
+Meaning:
+•	head() displays first 5 rows of dataset. 
 Example Output:
-Percentiles:
-       sepal_length  sepal_width
-count      50.00000    50.000000
-mean        5.00600     3.428000
-std         0.35249     0.379064
-min         4.30000     2.300000
-25%         4.80000     3.200000
-50%         5.00000     3.400000
-75%         5.20000     3.675000
-max         5.80000     4.400000
+sepal_length	sepal_width	petal_length	petal_width	species
+5.1	3.5	1.4	0.2	setosa
+________________________________________
+4. Group Dataset by Species
+grouped = iris.groupby('species')
+Meaning:
+Groups flowers according to species:
+•	setosa 
+•	versicolor 
+•	virginica 
+________________________________________
+5. Statistical Details
+print(grouped.describe())
+Meaning:
+describe() gives summary statistics like:
+•	count 
+•	mean 
+•	std 
+•	min 
+•	max 
+•	quartiles 
+________________________________________
+6. Mean Values
+print(grouped.mean())
+Meaning:
+Calculates average values of:
+•	sepal length 
+•	sepal width 
+•	petal length 
+•	petal width 
+for each flower species.
+________________________________________
+7. Standard Deviation
+print(grouped.std())
+Meaning:
+Measures variation/spread of data from the mean.
+Low std → values close to mean
+High std → values spread out
+________________________________________
+8. Percentile Values
+print(grouped.quantile([0.25, 0.50, 0.75]))
+Meaning:
+Calculates quartiles/percentiles.
+Percentile	Meaning
+0.25	25% values below this
+0.50	Median
+0.75	75% values below this
+________________________________________
+Important Functions Used
+Function	Meaning
+read_csv()	Reads CSV file
+head()	Displays first 5 rows
+groupby()	Groups similar data
+describe()	Gives summary statistics
+mean()	Calculates average
+std()	Standard deviation
+quantile()	Calculates percentiles
+
+
+###Important Terms for Oral Exam
+Mean
+Average of values.
+
+Median
+Middle value after sorting.
+
+Standard Deviation
+Measures spread of data.
+
+Percentile
+Percentage of data below a value.
+
+Example:
+
+25% percentile means 25% data lies below that value.
+
+GroupBy
+Used to divide data into categories.
+
+DataFrame
+Table-like structure in pandas.
 
 
 ###Important Terms for Oral Exam
