@@ -1,0 +1,385 @@
+
+CODE :-
+import pandas as pd
+df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+print("----- HEAD -----")
+print(df.head())
+print("\n----- TAIL -----")
+print(df.tail())
+print("\n----- SHAPE -----")
+print(df.shape)
+print("\n----- NULL VALUES COUNT -----")
+print(df.isnull().sum())
+print("\n----- NULL VALUES (True/False) -----")
+print(df.isnull())
+print("\n----- DESCRIPTION -----")
+print(df.describe())
+print("\n----- INFO -----")
+df.info()
+print("\n----- COLUMNS -----")
+print(df.columns)
+print("\n----- INDEX -----")
+print(df.index)
+print("\n----- DATA TYPES -----")
+print(df.dtypes)
+
+
+Explanation of Data Wrangling Practical Code
+This program uses the Python library Pandas to perform basic data preprocessing and data analysis on the Iris dataset.
+
+1. Importing Library
+import pandas as pd
+Explanation:
+pandas is a Python library used for data analysis and manipulation.
+pd is an alias (short name) for pandas.
+It helps to work with tables, rows, and columns easily.
+Why used?
+To load, analyze, clean, and manipulate datasets.
+
+2. Loading Dataset
+df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+Explanation:
+pd.read_csv() reads a CSV (Comma Separated Values) file.
+"C:\\Users\\raunak\\Downloads\\iris.csv" is the path of the dataset file.
+The dataset is stored into variable df.
+Meaning of df
+df stands for DataFrame.
+A DataFrame is a table with rows and columns.
+Why double \\?
+In Python, \ is an escape character.
+So we use \\ to represent a single backslash in file paths.
+Displaying Dataset Information
+
+3. Display First 5 Rows
+print("----- HEAD -----")
+print(df.head())
+Explanation:
+head() displays the first 5 rows of the dataset by default.
+Why used?
+To quickly see sample records from the dataset.
+Example Output:
+SepalLength	SepalWidth	PetalLength	PetalWidth	Species
+5.1	3.5	1.4	0.2	setosa
+
+4. Display Last 5 Rows
+print("\n----- TAIL -----")
+print(df.tail())
+Explanation:
+tail() shows the last 5 rows.
+Why used?
+To check ending records of dataset.
+
+5. Check Shape of Dataset
+print("\n----- SHAPE -----")
+print(df.shape)
+Explanation:
+shape gives dimensions of dataset.
+Output format:
+(rows, columns)
+Example:
+(150, 5)
+Meaning:
+150 rows
+5 columns
+Why used?
+To know size of dataset.
+Missing Value Handling
+
+6. Count Missing Values
+print("\n----- NULL VALUES COUNT -----")
+print(df.isnull().sum())
+Explanation:
+isnull() checks whether values are missing.
+Missing values are shown as True.
+sum() counts total missing values column-wise.
+Example:
+Column	Missing Values
+SepalLength	0
+Why used?
+To identify incomplete data.
+
+7. Show Missing Values Position
+print("\n----- NULL VALUES (True/False) -----")
+print(df.isnull())
+Explanation:
+Shows True where value is missing.
+Shows False where value exists.
+Why used?
+To locate exact positions of missing values.
+Statistical Information
+
+8. Dataset Description
+print("\n----- DESCRIPTION -----")
+print(df.describe())
+Explanation:
+describe() gives statistical summary of numeric columns.
+It shows:
+Count
+Mean
+Standard deviation
+Minimum value
+Maximum value
+Quartiles (25%, 50%, 75%)
+Why used?
+To understand data distribution and statistics.
+Example:
+Statistic	Meaning
+mean	average
+std	spread of data
+min	smallest value
+max	largest value
+Dataset Structure Information
+
+9. Information About Dataset
+print("\n----- INFO -----")
+df.info()
+Explanation:
+info() gives complete information about dataset.
+It displays:
+Number of rows and columns
+Column names
+Data types
+Non-null values
+Memory usage
+Why used?
+To understand structure of dataset.
+Column and Index Information
+
+10. Display Column Names
+print("\n----- COLUMNS -----")
+print(df.columns)
+Explanation:
+columns shows all column names.
+Example:
+Index(['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species'])
+Why used?
+To know variable names in dataset.
+
+11. Display Index Values
+print("\n----- INDEX -----")
+print(df.index)
+Explanation:
+index shows row numbering.
+
+Example:
+RangeIndex(start=0, stop=150, step=1)
+Meaning:
+Rows start from 0 and end at 149.
+Data Types
+
+12. Check Data Types
+print("\n----- DATA TYPES -----")
+print(df.dtypes)
+Explanation:
+dtypes displays datatype of each column.
+Example:
+Column	Data Type
+SepalLength	float64
+Species	object
+Meaning:
+float64 → decimal numbers
+object → text/string values
+Why used?
+To identify numeric and categorical data.
+
+Important Viva Questions & Answers
+Q1. What is Data Wrangling?
+Data wrangling is the process of cleaning, organizing, and transforming raw data into useful format.
+
+Q2. What is Pandas?
+Pandas is a Python library used for data analysis and manipulation.
+
+Q3. What is DataFrame?
+A DataFrame is a 2-dimensional table containing rows and columns.
+
+Q4. Difference between head() and tail()?
+head()	tail()
+Shows first rows	Shows last rows
+Q5. Why use describe()?
+To get statistical summary of numeric data.
+
+Q6. What does shape return?
+It returns number of rows and columns.
+
+Q7. Why use isnull()?
+To detect missing values.
+
+Q8. What is datatype object?
+It represents string/text data.
+
+Q9. What is CSV?
+CSV stands for Comma Separated Values.
+
+Q10. Why preprocessing is important?
+Because raw data may contain missing, incorrect, or inconsistent values. Preprocessing improves data quality.
+
+CSV==Comma Separated Values file.
+
+
+Which question will be ask on this pratical for oral exam 
+
+These are the most common oral viva questions for this Data Wrangling practical with short answers:
+
+1. What is Data Wrangling?
+Data wrangling is the process of cleaning and organizing raw data.
+
+2. What is Pandas?
+Pandas is a Python library used for data analysis.
+
+3. Why use import pandas as pd?
+To import pandas library with short name pd.
+
+4. What is CSV?
+CSV means Comma Separated Values file.
+
+5. What does read_csv() do?
+It reads CSV file and loads data into DataFrame.
+
+6. What is DataFrame?
+A table of rows and columns in pandas.
+
+7. What does head() do?
+Shows first 5 rows.
+
+8. What does tail() do?
+Shows last 5 rows.
+
+9. What does shape return?
+Returns number of rows and columns.
+
+Example:
+(150,5) → 150 rows, 5 columns.
+
+10. What is isnull()?
+Checks missing values.
+
+11. Why use sum() with isnull()?
+Counts total missing values.
+
+12. What does describe() show?
+Statistical summary:
+
+Mean
+
+Min
+
+Max
+
+Count
+
+Standard deviation
+
+13. What does info() show?
+Dataset structure:
+
+Columns
+
+Datatypes
+
+Non-null values
+
+14. What is dtypes?
+Shows datatype of each column.
+
+15. Difference between numeric and object datatype?
+Numeric → numbers
+
+Object → text/string
+
+16. What does columns do?
+Shows all column names.
+
+17. What does index show?
+Shows row numbering.
+
+18. Why check missing values?
+To clean incomplete data.
+
+19. What is preprocessing?
+Cleaning and preparing data before analysis.
+
+20. Why is data normalization used?
+To scale data into similar range for better analysis.
+
+These are high chance viva questions for your practical exam.
+
+
+Yes
+
+Important Viva Questions with Answers (Easy Language)
+Q1. Why do we use pandas?
+To read, analyze, and manipulate data easily.
+
+Q2. Why is DataFrame important?
+Because it stores data in table format (rows and columns).
+
+Q3. What is the difference between head() and tail()?
+head()	tail()
+First 5 rows	Last 5 rows
+Q4. Why do we check shape?
+To know dataset size.
+
+Q5. What is missing value?
+A value that is empty or not available in dataset.
+
+Q6. Why use isnull()?
+To detect missing values.
+
+Q7. What is the use of describe()?
+To get statistical information of numeric data.
+
+Q8. What is mean in describe()?
+Average of values.
+
+Q9. What is standard deviation?
+It shows spread of data from mean.
+
+Q10. What is datatype?
+Type of data stored in column.
+
+Example:
+
+int → integer
+
+float → decimal
+
+object → string/text
+
+Q11. Why is preprocessing important?
+Because raw data may contain errors or missing values.
+
+Q12. What is data normalization?
+Scaling data into same range.
+
+Q13. What happens if dataset contains null values?
+Analysis may become incorrect.
+
+Q14. What is the difference between info() and describe()?
+info()	describe()
+Structure of dataset	Statistical summary
+Q15. Why use Python for data science?
+Because it is simple and has powerful libraries like pandas and numpy.
+
+Q16. What is open source dataset?
+Dataset freely available on internet.
+
+Example: Iris dataset from Kaggle
+
+Q17. What are rows and columns?
+Rows → records
+
+Columns → attributes/features
+
+Q18. What is normalization advantage?
+Improves machine learning performance.
+
+Q19. What is categorical data?
+Text data like names or labels.
+
+Example:
+Male/Female
+
+Q20. How convert categorical data into numeric?
+Using encoding methods like Label Encoding.
+
+
