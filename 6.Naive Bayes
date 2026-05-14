@@ -1,0 +1,547 @@
+
+CoDE 1 :-
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
+# Load dataset (make sure iris.csv is in same folder)
+data = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+print(data.head())
+X = data.iloc[:, :-1] # all columns except last
+y = data.iloc[:, -1] # last column (target)
+X_train, X_test, y_train, y_test = train_test_split(
+X, y, test_size=0.25, random_state=42
+)
+model = GaussianNB()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+print("Predictions:", y_pred)
+cm = confusion_matrix(y_test, y_pred)
+print("\nConfusion Matrix:\n", cm)
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred, average='macro')
+recall = recall_score(y_test, y_pred, average='macro')
+error_rate = 1 - accuracy
+print("\nAccuracy:", accuracy)
+print("Error Rate:", error_rate)
+print("Precision:", precision)
+print("Recall:", recall)
+
+##########Explaination
+
+import pandas as pd
+Imports the pandas library.
+pd is a short name (alias) used for pandas.
+Pandas is used for handling datasets in table form.
+
+from sklearn.model_selection import train_test_split
+Imports train_test_split function from Scikit-learn.
+Used to divide dataset into:
+
+Training data
+
+Testing data
+
+from sklearn.naive_bayes import GaussianNB
+Imports the Gaussian Naive Bayes algorithm.
+This algorithm is used for classification tasks.
+
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score
+Imports evaluation metrics:
+confusion_matrix → shows correct and incorrect predictions
+accuracy_score → calculates accuracy
+precision_score → calculates precision
+recall_score → calculates recall
+
+data = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+Reads the CSV file using pandas.
+Stores dataset into variable data.
+read_csv() loads data from CSV format.
+
+print(data.head())
+Displays first 5 rows of dataset.
+Used to check whether data loaded correctly.
+
+X = data.iloc[:, :-1]
+Selects all rows and all columns except last column.
+X contains input features.
+In Iris dataset:
+Sepal length
+Sepal width
+Petal length
+Petal width
+Meaning of iloc
+: → all rows
+:-1 → all columns except last
+
+y = data.iloc[:, -1]
+Selects all rows of last column.
+y contains target/output class.
+In Iris dataset:
+Setosa
+Versicolor
+Virginica
+Meaning
+-1 means last column.
+
+X_train, X_test, y_train, y_test = train_test_split(
+X, y, test_size=0.25, random_state=42
+)
+Purpose
+Splits dataset into training and testing parts.
+Variables
+X_train → training input data
+
+X_test → testing input data
+
+y_train → training output labels
+
+y_test → testing output labels
+Parameters
+test_size=0.25
+
+25% data used for testing
+
+75% data used for training
+
+random_state=42
+
+Fixes random splitting.
+
+Gives same result every time code runs.
+
+model = GaussianNB()
+Creates object of Gaussian Naive Bayes classifier.
+model variable stores the algorithm.
+
+model.fit(X_train, y_train)
+Trains the model using training data.
+fit() teaches the algorithm patterns from dataset.
+
+y_pred = model.predict(X_test)
+Predicts output using test data.
+Predicted values stored in y_pred.
+
+print("Predictions:", y_pred)
+Prints predicted class labels.
+
+cm = confusion_matrix(y_test, y_pred)
+Creates confusion matrix.
+Compares actual values (y_test) with predicted values (y_pred).
+Confusion Matrix contains
+TP → True Positive
+
+TN → True Negative
+
+FP → False Positive
+
+FN → False Negative
+
+print("\nConfusion Matrix:\n", cm)
+Displays confusion matrix.
+
+\n means new line.
+
+accuracy = accuracy_score(y_test, y_pred)
+Calculates accuracy of model.
+Formula
+Accuracy= 
+TP+TN/FP+FN+TP+TN
+​
+precision = precision_score(y_test, y_pred, average='macro')
+Calculates precision.
+Formula
+Precision= 
+TP/TP+FP
+
+average='macro'
+Calculates precision for all classes separately.
+Then finds average.
+
+recall = recall_score(y_test, y_pred, average='macro')
+Calculates recall.
+Formula
+Recall= TP/TP+FN
+
+​error_rate = 1 - accuracy
+Calculates error rate.
+Formula
+Error Rate=1−Accuracy
+
+print("\nAccuracy:", accuracy)
+Prints accuracy value.
+
+print("Error Rate:", error_rate)
+Prints error rate.
+
+print("Precision:", precision)
+Prints precision value.
+
+print("Recall:", recall)
+Prints recall value.
+
+############Important Oral Questions with Answers
+Q1. What is Naive Bayes?
+Naive Bayes is a machine learning classification algorithm based on Bayes Theorem.
+
+Q2. Why is it called “Naive”?
+Because it assumes all features are independent from each other.
+
+Q3. What is GaussianNB?
+GaussianNB is a type of Naive Bayes used for continuous numerical data.
+
+Q4. What is training data?
+Data used to train the model.
+
+Q5. What is testing data?
+Data used to check model performance.
+
+Q6. What is confusion matrix?
+A table used to compare actual and predicted values.
+
+Q7. What is accuracy?
+Accuracy means percentage of correct predictions.
+
+Q8. Difference between precision and recall?
+Precision	Recall
+Measures exact positive predictions	Measures correctly identified positives
+Q9. What is fit()?
+Used to train the model.
+
+Q10. What is predict()?
+Used to predict output from test data.
+
+#######Which are the More imp que and answers will be ask
+
+Most Important Oral Questions & Answers
+Data Analytics III – Naive Bayes Classification (Iris Dataset)
+1. What is Machine Learning?
+Machine Learning is a technique where computers learn patterns from data and make predictions automatically.
+
+2. What is Classification?
+Classification is a supervised learning method used to predict categories or classes.
+
+Example:
+Spam or Not Spam
+
+Pass or Fail
+
+3. What is Naive Bayes Algorithm?
+Naive Bayes is a classification algorithm based on Bayes Theorem.
+
+It predicts the class using probability.
+
+4. Why is it called “Naive” Bayes?
+Because it assumes all features are independent of each other.
+
+5. What is Bayes Theorem?
+Bayes theorem calculates probability using prior knowledge.
+
+Formula
+P(A∣B)= P(A)*P(B∣A)/P(B)
+​
+P(A)
+0.20
+
+P(B∣A)
+0.85
+
+P(B∣¬A)
+0.10
+
+P
+(
+A
+∣
+B
+)
+=
+P
+(
+B
+∣
+A
+)
+P
+(
+A
+)
+P
+(
+B
+)
+≈
+0.68
+,
+  
+P
+(
+B
+)
+≈
+0.25
+P(A∣B)= 
+P(B)
+P(B∣A)P(A)
+​
+ ≈0.68,P(B)≈0.25
+Bayes theorem controls adjust prior and likelihood terms, then recompute evidence and posterior.
+P(B)=0.25
+P(B|A)P(A)=0.17
+P(A|B)~0.68
+Posterior = useful evidence / total evidence
+
+6. What is Gaussian Naive Bayes?
+GaussianNB is a type of Naive Bayes used for continuous numerical data.
+
+Example:
+
+Height
+
+Weight
+
+Petal length
+
+7. Why do we use Iris Dataset?
+Because it is simple, small, and good for classification practice.
+
+8. What are features in Iris Dataset?
+Features are input columns:
+
+Sepal Length
+
+Sepal Width
+
+Petal Length
+
+Petal Width
+
+9. What is target variable?
+Target variable is output/class column.
+
+Example:
+
+Setosa
+
+Versicolor
+
+Virginica
+
+10. What is pandas?
+pandas is a Python library used for data handling and analysis.
+
+11. What is Scikit-learn?
+scikit-learn is a Python library used for machine learning algorithms.
+
+12. Why do we split dataset?
+To train and test the model separately.
+
+13. What is training data?
+Data used to teach the model.
+
+14. What is testing data?
+Data used to check performance of model.
+
+15. What is train_test_split()?
+It divides dataset into training and testing parts.
+
+16. Why use random_state=42?
+To get same random output every time.
+
+17. What is model training?
+Process of teaching algorithm using training data.
+
+18. What does fit() do?
+fit() trains the model.
+
+Example:
+
+model.fit(X_train, y_train)
+19. What does predict() do?
+predict() gives predicted output.
+
+Example:
+
+model.predict(X_test)
+20. What is confusion matrix?
+A table showing correct and incorrect predictions.
+
+21. What are TP, TN, FP, FN?
+Term	Meaning
+TP	True Positive
+TN	True Negative
+FP	False Positive
+FN	False Negative
+22. What is Accuracy?
+Accuracy means percentage of correct predictions.
+
+Formula
+A
+c
+c
+u
+r
+a
+c
+y
+=
+T
+P
++
+T
+N
+T
+P
++
+T
+N
++
+F
+P
++
+F
+N
+Accuracy= 
+TP+TN+FP+FN
+TP+TN
+​
+ 
+
+23. What is Error Rate?
+Percentage of wrong predictions.
+
+Formula
+E
+r
+r
+o
+r
+ 
+R
+a
+t
+e
+=
+1
+−
+A
+c
+c
+u
+r
+a
+c
+y
+Error Rate=1−Accuracy
+
+24. What is Precision?
+Precision measures correct positive predictions.
+
+Formula
+P
+r
+e
+c
+i
+s
+i
+o
+n
+=
+T
+P
+T
+P
++
+F
+P
+Precision= 
+TP+FP
+TP
+​
+ 
+
+25. What is Recall?
+Recall measures how many actual positives are identified correctly.
+
+Formula
+R
+e
+c
+a
+l
+l
+=
+T
+P
+T
+P
++
+F
+N
+Recall= 
+TP+FN
+TP
+​
+ 
+
+26. Difference between Precision and Recall?
+Precision	Recall
+Correct predicted positives	Correct actual positives
+27. What is CSV file?
+CSV means Comma Separated Values file.
+
+Used to store tabular data.
+
+28. What does head() do?
+Displays first 5 rows of dataset.
+
+29. What is iloc?
+iloc selects rows and columns using index positions.
+
+Example:
+
+data.iloc[:, :-1]
+30. Why is Naive Bayes fast?
+Because it uses probability and simple calculations.
+
+Very Important Viva Questions (Mostly Asked)
+Q. Why use GaussianNB instead of other algorithms?
+Because Iris dataset contains continuous numerical values.
+
+Q. What type of learning is Naive Bayes?
+Supervised Learning.
+
+Q. Is Naive Bayes used for prediction or clustering?
+Prediction/classification.
+
+Q. What is output of confusion matrix?
+Matrix showing actual vs predicted values.
+
+Q. Which library is used for confusion matrix?
+sklearn.metrics
+
+Q. What is the extension of CSV file?
+.csv
+
+Q. What happens if model accuracy is low?
+Model predictions become poor and unreliable.
+
+Q. Can Naive Bayes handle large datasets?
+Yes, it works efficiently on large datasets.
+
+Q. What are advantages of Naive Bayes?
+Fast
+
+Simple
+
+Works well for classification
+
+Good accuracy on small datasets
+
+Q. What are disadvantages of Naive Bayes?
+Assumes features are independent
+
+Sometimes gives lower accuracy for complex data
+
+
