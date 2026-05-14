@@ -1,0 +1,678 @@
+
+
+CODE 1 :-
+import pandas as pd
+# Load dataset
+df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+# Create categorical groups based on sepal length
+df['sepal_group'] = pd.cut(df['sepal_length'], bins=3, labels=["Low", "Medium", "High"])
+# Group by categorical variable and calculate statistics
+grouped = df.groupby('sepal_group')['petal_length']
+print("Mean:\n", grouped.mean())
+print("\nMedian:\n", grouped.median())
+print("\nMinimum:\n", grouped.min())
+print("\nMaximum:\n", grouped.max())
+print("\nStandard Deviation:\n", grouped.std())
+
+CODE 2 :-
+import pandas as pd
+df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+grouped = df.groupby('species')
+for name, group in grouped:
+print("\n----- Species:", name, "-----")
+print("\nMean:")
+print(group.mean(numeric_only=True))
+print("\nStandard Deviation:")
+print(group.std(numeric_only=True))
+print("\nPercentiles:")
+print(group.describe())
+
+
+
+###############explaination
+Practical: Descriptive Statistics – Measures of Central Tendency and Variability
+You are using the Iris Dataset dataset.
+This practical shows how to calculate:
+
+Mean
+
+Median
+
+Minimum value
+
+Maximum value
+
+Standard Deviation
+
+Percentiles
+
+using Python and Pandas.
+
+##########CODE 1 Explanation
+
+import pandas as pd
+Explanation:
+import is used to include a library.
+pandas is a Python library used for data analysis.
+pd is the short name (alias) for pandas.
+
+# Load dataset
+df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+Explanation:
+pd.read_csv() reads the CSV file.
+Dataset is stored inside variable df.
+df means DataFrame (table format data).
+Example:
+sepal_length	sepal_width	petal_length	species
+5.1	3.5	1.4	Iris-setosa
+
+# Create categorical groups based on sepal length
+df['sepal_group'] = pd.cut(df['sepal_length'], bins=3, labels=["Low", "Medium", "High"])
+Explanation:
+This line creates categories/groups from numeric values.
+Breakdown:
+df['sepal_length']
+→ Takes sepal length column.
+pd.cut()
+→ Divides continuous numeric values into groups.
+bins=3
+→ Creates 3 groups.
+labels=["Low", "Medium", "High"]
+→ Names of groups.
+Example:
+Sepal Length	Group
+4.5	Low
+5.8	Medium
+7.2	High
+
+A new column sepal_group is created.
+
+# Group by categorical variable and calculate statistics
+grouped = df.groupby('sepal_group')['petal_length']
+Explanation:
+groupby('sepal_group')
+→ Groups rows according to category.
+['petal_length']
+→ Selects petal_length column for calculations.
+Result stored in variable grouped.
+Meaning:
+Now statistics will be calculated separately for:
+Low group
+Medium group
+High group
+print("Mean:\n", grouped.mean())
+Explanation:
+mean() calculates average value.
+Formula:
+
+Mean=∑x/n​
+
+Output Example:
+Mean:
+Low       1.46
+Medium    4.25
+High      5.55
+
+print("\nMedian:\n", grouped.median())
+Explanation:
+median() gives middle value after sorting data.
+Output Example:
+Median:
+Low       1.5
+Medium    4.3
+High      5.6
+
+print("\nMinimum:\n", grouped.min())
+Explanation:
+min() gives smallest value in each group.
+Output Example:
+Minimum:
+Low       1.0
+Medium    3.0
+High      4.5
+
+print("\nMaximum:\n", grouped.max())
+Explanation:
+max() gives largest value.
+Output Example:
+Maximum:
+Low       1.9
+Medium    5.1
+High      6.9
+
+print("\nStandard Deviation:\n", grouped.std())
+Explanation:
+std() calculates standard deviation.
+It shows how much data varies from mean.
+Low SD → data close to mean
+High SD → data spread out more
+Formula:
+
+σ=square root(∑(x−μ)^2/N) 
+Output Example:
+Standard Deviation:
+Low       0.17
+Medium    0.52
+High      0.60
+
+#####
+CODE 2 Explanation
+import pandas as pd
+Explanation:
+Imports pandas library.
+
+df = pd.read_csv("C:\\Users\\raunak\\Downloads\\iris.csv")
+Explanation:
+Loads iris dataset into DataFrame.
+
+grouped = df.groupby('species')
+Explanation:
+Groups dataset according to flower species.
+Species are:
+Iris-setosa
+Iris-versicolor
+Iris-virginica
+for name, group in grouped:
+Explanation:
+Loop runs through each species group.
+name
+→ species name
+group
+→ rows belonging to that species
+Example:
+First loop:
+name = Iris-setosa
+
+print("\n----- Species:", name, "-----")
+Explanation:
+Prints heading for each species.
+Example:
+
+----- Species: Iris-setosa -----
+
+print("\nMean:")
+print(group.mean(numeric_only=True))
+Explanation:
+Calculates average of numeric columns only.
+numeric_only=True
+→ ignores text columns like species.
+Output Example:
+Mean:
+sepal_length    5.006
+sepal_width     3.428
+petal_length    1.462
+petal_width     0.246
+
+print("\nStandard Deviation:")
+print(group.std(numeric_only=True))
+Explanation:
+Calculates spread/variation of data.
+Output Example:
+Standard Deviation:
+sepal_length    0.352
+sepal_width     0.379
+petal_length    0.174
+petal_width     0.105
+
+print("\nPercentiles:")
+print(group.describe())
+Explanation:
+describe() gives complete statistical summary:
+count
+mean
+std
+min
+25%
+
+50%
+
+75%
+max
+Example Output:
+Percentiles:
+       sepal_length  sepal_width
+count      50.00000    50.000000
+mean        5.00600     3.428000
+std         0.35249     0.379064
+min         4.30000     2.300000
+25%         4.80000     3.200000
+50%         5.00000     3.400000
+75%         5.20000     3.675000
+max         5.80000     4.400000
+
+
+###Important Terms for Oral Exam
+Mean
+Average of values.
+
+Median
+Middle value after sorting.
+
+Standard Deviation
+Measures spread of data.
+
+Percentile
+Percentage of data below a value.
+
+Example:
+
+25% percentile means 25% data lies below that value.
+
+GroupBy
+Used to divide data into categories.
+
+DataFrame
+Table-like structure in pandas.
+
+####Common Oral Questions with Answers
+
+1. Why do we use pandas?
+Pandas is used for data analysis and handling datasets.
+
+2. What is DataFrame?
+A DataFrame is a table of rows and columns.
+
+3. What is groupby()?
+It groups data based on categories.
+
+4. Why is standard deviation important?
+It shows variability/spread of data.
+
+5. Difference between mean and median?
+Mean	Median
+Average	Middle value
+Affected by outliers	Less affected by outliers
+6. What does describe() do?
+It gives statistical summary of dataset.
+
+7. Why use numeric_only=True?
+To calculate statistics only on numeric columns.
+
+8. What is percentile?
+It tells position of data in percentage form.
+
+
+More imp que answer of oral
+
+Important Oral Questions & Answers
+Descriptive Statistics Practical (DS)
+1. What is Descriptive Statistics?
+Descriptive statistics is used to summarize and analyze data using values like:
+
+Mean
+
+Median
+
+Standard deviation
+
+Minimum
+
+Maximum
+
+It helps us understand the dataset easily.
+
+2. What is Central Tendency?
+Central tendency means the central or average value of data.
+
+Types:
+
+Mean
+
+Median
+
+Mode
+
+3. What is Mean?
+Average of all values.
+
+Formula:
+
+Mean
+=
+∑
+x
+n
+Mean= 
+n
+∑x
+​
+ 
+
+Example:
+Data = 2, 4, 6
+
+Mean = (2+4+6)/3 = 4
+
+4. What is Median?
+Median is the middle value after arranging data in order.
+
+Example:
+1, 3, 5, 7, 9
+
+Median = 5
+
+5. What is Mode?
+Mode is the most frequently occurring value.
+
+Example:
+1, 2, 2, 3
+
+Mode = 2
+
+6. Difference Between Mean and Median?
+Mean	Median
+Average value	Middle value
+Affected by outliers	Not much affected
+Uses all values	Uses position
+7. What is Variability?
+Variability means spread of data.
+
+It tells how far data values are from mean.
+
+8. What is Standard Deviation?
+Standard deviation measures spread of data around mean.
+
+Low SD → data close to mean
+High SD → data spread far away
+
+Formula:
+
+ 
+​
+ 
+​
+ 
+
+9. Why is Standard Deviation Important?
+Shows consistency of data
+
+Helps identify variation
+
+Used in data analysis and ML
+
+10. What is Percentile?
+Percentile tells percentage of data below a value.
+
+Example:
+25th percentile means 25% data lies below it.
+
+11. What does describe() function do?
+describe() gives statistical summary:
+
+count
+
+mean
+
+std
+
+min
+
+max
+
+percentiles
+
+12. Why do we use Pandas?
+Pandas is used for:
+
+Reading datasets
+
+Data analysis
+
+Statistical calculations
+
+Data cleaning
+
+13. What is DataFrame?
+A DataFrame is a table with rows and columns.
+
+Example:
+
+Name	Age
+Ram	20
+14. What is CSV File?
+CSV means:
+Comma Separated Values
+
+Used to store tabular data.
+
+15. What does pd.read_csv() do?
+It reads CSV file into pandas DataFrame.
+
+Example:
+
+df = pd.read_csv("iris.csv")
+16. Why is pandas imported as pd?
+pd is a short alias for pandas.
+
+It makes coding shorter and easier.
+
+17. What is Grouping in Data Analysis?
+Grouping means dividing data into categories.
+
+Example:
+
+Male/Female
+
+Low/Medium/High
+
+18. What does groupby() do?
+groupby() groups rows with same category values.
+
+Example:
+
+df.groupby('species')
+Groups flowers according to species.
+
+19. What is categorical data?
+Data divided into categories.
+
+Examples:
+
+Gender
+
+Color
+
+Species
+
+20. What is numerical data?
+Data containing numbers.
+
+Examples:
+
+Age
+
+Height
+
+Salary
+
+21. Why do we use pd.cut()?
+pd.cut() converts numeric data into categories.
+
+Example:
+Low, Medium, High
+
+22. What is bins=3 in pd.cut()?
+It divides data into 3 equal groups.
+
+23. What is label in pd.cut()?
+Labels give names to groups.
+
+Example:
+
+labels=["Low","Medium","High"]
+24. Why do we use numeric_only=True?
+To calculate statistics only on numeric columns and ignore text columns.
+
+25. What is minimum and maximum?
+Minimum → smallest value
+
+Maximum → largest value
+
+26. What is the Iris Dataset?
+Iris Dataset is a famous dataset used in machine learning and statistics.
+
+It contains flower measurements.
+
+Species:
+
+Iris-setosa
+
+Iris-versicolor
+
+Iris-virginica
+
+27. What are features in Iris dataset?
+Features are measurable properties:
+
+sepal length
+
+sepal width
+
+petal length
+
+petal width
+
+28. Why is Iris dataset popular?
+Because:
+
+Simple dataset
+
+Easy to analyze
+
+Used for classification practice
+
+29. What is outlier?
+Outlier is a value very different from other values.
+
+Example:
+1, 2, 3, 100
+
+100 is outlier.
+
+30. Which statistics are affected by outliers?
+Mean affected
+
+Standard deviation affected
+
+Median is less affected.
+
+31. Why do we calculate statistics separately for each species?
+To compare characteristics of different flower species.
+
+32. What is iteration in for loop?
+Iteration means repeating steps one by one.
+
+Example:
+
+for name, group in grouped:
+Runs for every species.
+
+33. What is the use of print()?
+Used to display output on screen.
+
+34. What is library in Python?
+Library is a collection of pre-written functions.
+
+Example:
+
+pandas
+
+numpy
+
+matplotlib
+
+35. Why is this practical important?
+This practical helps:
+
+Understand dataset
+
+Summarize data
+
+Analyze patterns
+
+Prepare data for machine learning
+
+
+Pd.series(data) why it will be
+
+pd.Series(data) is used to create a Series in pandas.
+
+A Series is a one-dimensional array-like structure that stores:
+
+data values
+
+index values
+
+It is similar to a single column in a table.
+
+Syntax
+pd.Series(data)
+Example
+import pandas as pd
+
+a = [10, 20, 30]
+
+s = pd.Series(a)
+
+print(s)
+Output
+0    10
+1    20
+2    30
+dtype: int64
+Explanation
+Part	Meaning
+0,1,2	Index
+10,20,30	Data values
+dtype	Data type
+Why do we use pd.Series()?
+We use it:
+
+to store one-dimensional data
+
+to label data using indexes
+
+for statistical operations
+
+for easy data manipulation
+
+Difference Between Series and DataFrame
+Series	DataFrame
+One-dimensional	Two-dimensional
+Single column	Multiple columns
+Example:
+
+Series
+Age
+20
+21
+22
+DataFrame
+Name	Age
+Ram	20
+Shyam	21
+Custom Index Example
+import pandas as pd
+
+s = pd.Series([90, 85, 88], index=["A", "B", "C"])
+
+print(s)
+Output
+A    90
+B    85
+C    88
+dtype: int64
+Here:
+
+A, B, C are custom indexes.
+
+Important Oral Question
+Q. What is pd.Series()?
+pd.Series() is a pandas function used to create a one-dimensional labeled array.
+
+Q. What is difference between list and Series?
+List	Series
+No labels/index	Has index
+Normal Python	Pandas structure
+Fewer operations	Statistical operations possible
+
